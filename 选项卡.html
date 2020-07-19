@@ -1,0 +1,45 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .active{
+        background-color: red;
+      }
+      #app div{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="选项一" style="background-color: red;">
+      <input type="button" value="选项二">
+      <input type="button" value="选项三">
+      <input type="button" value="选项四">
+      <div style="display: block;">111</div>
+      <div>222</div>
+      <div>333</div>
+      <div>444</div>
+    </div>
+  <script>
+    var oDiv = document.getElementById('app')
+    var bnt = oDiv.getElementsByTagName('input')
+    var aDiv = oDiv.getElementsByTagName('div')
+    for(var i=0 ; i<bnt.length;i++){
+      bnt[i].index=i
+      bnt[i].onclick = function() {
+        for(var i=0;i<bnt.length;i++){
+          bnt[i].className = ''
+          bnt[i].style = ''
+          aDiv[i].style.display = 'none'
+        }
+        this.className = 'active'
+        aDiv[this.index].style.display='block'
+      }
+    }
+  </script>
+  </body>
+  </html>

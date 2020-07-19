@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>1</p>
+        <p class="yes">nihao</p>
+        <p>3</p>
+     </div>
+</body>
+<script>
+    var p = document.getElementsByTagName('p');
+   for(var i = 0;i <p.length;i++){
+　　//第一种方法，用classList这个H5 API，有兼容性问题
+// 　　if(p[i].classList.contains('test')==true){
+// 　　　　console.log(p[i].innerHTML);
+//       }
+　　//第二种方法，用className这个属性
+　　if(p[i].className=='yes'){
+　　　　console.log(p[i].innerHTML);
+     }
+　　//第三种方法，用getAttribute()这个方法
+// 　　if(p[i].getAttribute("class")=='test'){
+//       　　console.log(p[i].innerHTML);
+//    　}
+}
+</script>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li>1</li>
+            <li class="box">2</li>
+            <li>3</li>
+            <li class="box">4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function () {
+            function getClassName(){
+                  var allElement=document.getElementsByTagName('*');//用*获取所有的元素。
+                console.log(allElement);
+                var arr=[];//声明一个数组用来存取获取到元素!==
+    
+               for(var i=0;i<allElement.length;i++){
+                      if(allElement[i].className=="box"){
+                          console.log(1);
+                          arr.push(allElement[i]);
+                      }
+                   }
+                return arr;
+           }
+            var aLi=getClassName();
+            console.log(aLi);
+        }
+    </script>
+    </body>
+</html> -->

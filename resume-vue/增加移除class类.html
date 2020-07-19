@@ -1,0 +1,46 @@
+<!-- <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<input type="button" id="btn" value="删除">
+<div id="list">
+   <div id="item">1111</div>
+</div>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    $('btn').onclick = function() {
+        if($('list').children[0]) {
+            $('list').removeChild($('item'));
+        }
+    }
+</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="parent">
+        <li class="good">乖小孩</li>
+        <li class="bad">壞小孩</li>
+        <li class="good">乖小孩</li>
+    </div>
+    <script>
+        
+var parent = document.querySelector('.parent')
+parent.removeChild(parent.querySelector('.bad')) // 只刪除壞小孩 .bad
+
+    </script>
+</body>
+</html>
