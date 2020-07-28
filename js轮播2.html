@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="index.css">
     <script>
         window.onload=function() {
-            // body... 
             var prev=document.getElementById("prev");
             var next=document.getElementById("next");
             var list=document.getElementById("list");
@@ -40,8 +39,7 @@
                         setTimeout(go, inteval);
                     }
                     else 
-                    {
-                        
+                    { 
                        animated=false;
                      // list.style.left=newLeft+"px";
                          if (newLeft >-600) {
@@ -53,35 +51,24 @@
                     }
                 }
                 go();
-            };
-               
+            };  
             prev.onclick=function(){
                 /*添加一个if判断index为1时，如果继续往前滚的话就让index返回第五个span
                 但是当快速点击arrow时会出现一种span点亮延迟的情况。可以尝试把判断index是否大于1或小于5的情况放进
                 判断是否animated的if语句中，先判断能不能点击，再点亮。
                 */
-
                 if (!animated) {
                 if (index==1) {
                     index=5;
                 }else {
                    index -=1; 
                 }
-                
                 shownButton();
                      animate(600);
                 }
-              
-
-               
-
-
             };
 
             next.onclick=function(){
-                 
-                
-                
                 if (!animated) {
                      if (index==5) {
                     index=1;

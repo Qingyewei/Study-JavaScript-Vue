@@ -91,11 +91,11 @@
     /*
       图书管理-添加图书
     */
-    // Vue.directive('focus', {
-    //   inserted: function (el) {
-    //     el.focus();
-    //   }
-    // });
+    Vue.directive('focus', {
+      inserted: function (el) {
+        el.focus();
+      }
+    });
     Vue.filter('format', function(value, arg) {
       function dateFormat(date, format) {
         if (typeof date === "string") {
