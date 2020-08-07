@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>online</title>
+    <script language=javaScript>
+        ///这里是获得登录时候的时间，用来和动态的时间做差来求时长
+        var s = new Date();
+
+        function clockon() {
+            var thistime = new Date();
+            //时间差
+            diff = new Date();
+            diff.setTime(Math.abs(thistime.getTime() - s.getTime()));
+            timediff = diff.getTime();
+            hos = Math.floor(timediff / (1000 * 60 * 60));
+            mins = Math.floor(timediff / (1000 * 60));
+            secs = Math.floor(timediff / 1000);
+            //end
+            var hours = thistime.getHours();
+            var minutes = thistime.getMinutes();
+            var seconds = thistime.getSeconds();
+
+            if (eval(hours) < 10) {
+                hours = "0" + hours;
+            }
+            if (eval(minutes) < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            thistime = hours + ":" + minutes + ":" + seconds;
+            bgclockshade.innerHTML = thistime //这里动态的嵌入当前的时间
+            //如果不取余的话，秒数是一直上升的，所以在达到一个60的时候就取余就可以解决这个问题了
+            if (secs > 59) {
+                secs = secs % 60;
+            }
+            if (mins > 59) {
+                mins = mins % 60;
+            }
+            if (eval(secs) < 10) {
+                secs = "0" + secs;
+            }
+            if (eval(mins) < 10) {
+                mins = "0" + mins;
+            }
+            if (eval(hos) < 10) {
+                hos = "0" + hos;
+            }
+            jishi.innerHTML = hos + ":" + mins + ":" + secs;
+            var timer = setTimeout("clockon()", 200);
+        }
+    </script>
+</head>
+
+<body onload="clockon();">
+    登录时间：
+    <div id="bgclockshade"></div>
+    上网时长：
+    <div id="jishi"></div>
+</body>
+
+</html>

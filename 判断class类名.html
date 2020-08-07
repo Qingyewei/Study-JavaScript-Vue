@@ -7,12 +7,14 @@
 </head>
 <body>
     <div>
-        <p>1</p>
+        <p id="no">1</p>
         <p class="yes">nihao</p>
         <p>3</p>
      </div>
 </body>
 <script>
+    var no = document.getElementById('no');
+    console.log(no);
     var p = document.getElementsByTagName('p');
    for(var i = 0;i <p.length;i++){
 　　//第一种方法，用classList这个H5 API，有兼容性问题
@@ -21,7 +23,7 @@
 //       }
 　　//第二种方法，用className这个属性
 　　if(p[i].className=='yes'){
-　　　　console.log(p[i].innerHTML);
+    　　　　p[i].style.display = "none";
      }
 　　//第三种方法，用getAttribute()这个方法
 // 　　if(p[i].getAttribute("class")=='test'){

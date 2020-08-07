@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>实践题 - 选项卡</title>
+    <style type="text/css">
+        /* CSS样式制作 */
+        .tab-div {
+            width: 400px;
+            position: relative; /*作为选项卡内容的定位*/
+        }
+        ul {
+            list-style: none;
+        }
+        .tab {
+            width: 400px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+ 
+            position: relative;
+            z-index: 2;
+        }
+        .tab li{
+            float: left;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #DDD;
+            border-bottom: 0;
+            margin-left: 10px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .tab-content {
+            width: 350px;
+            /*position: absolute;*/
+            border: 1px solid #DDD;
+            border-top: 3px solid #e4393c;
+ 
+            text-align: center;
+ 
+            position: absolute;
+            top: 31px;
+            left: 0;
+        }
+        .tab-content ul {
+            margin: 0;
+            padding: 10px;
+        }
+        .tab-content li {
+            padding: 10px;
+        }
+        .tab-content li a {
+            color: #000;
+            text-decoration: none;
+        }
+        .tab-content li a:hover {
+            color: #e4393c;
+            text-decoration: underline;
+        }
+        .tab .tab-active {
+            border-top: 3px solid #e4393c;
+            border-bottom: 3px solid #fff;
+        }
+        .tab-content-show {
+            display: block;
+        }
+        .tab-content-hide {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        // JS实现选项卡切换
+        window.onload = function() {
+            var tabList = document.getElementById("tab-list");
+            var aLis = tabList.getElementsByTagName("li");
+            var tDiv = document.getElementById("tDiv");
+            var contents = tDiv.getElementsByTagName("div");
+ 
+            for(var i = 0; i < aLis.length; i++) {
+                aLis[i].index = i;
+                aLis[i].onclick = function() {
+                    for(var j = 0; j < aLis.length; j++) {
+                        aLis[j].className = '';
+                    }
+                    this.className = "tab-active";
+ 
+                    for(var j = 0; j < contents.length; j++) {
+                        contents[j].className = "tab-content tab-content-hide";
+                    }
+                    contents[this.index].className = "tab-content tab-content-show";
+                };
+            }
+        };
+ 
+    </script>
+ 
+</head>
+<body>
+<!-- HTML页面布局 -->
+<div id="tDiv" class="tab-div">
+    <ul id="tab-list" class="tab">
+        <li class="tab-active">房产</li>
+        <li>家居</li>
+        <li>二手房</li>
+    </ul>
+    <div class="tab-content tab-content-show">
+        <ul>
+            <li><a href="#">275万购昌平邻铁三居 总价20万买一居</a></li>
+            <li><a href="#">200万内购五环三居 140万安家东三环</a></li>
+            <li><a href="#">北京首现零首付楼盘 53万购东5环50平</a></li>
+            <li><a href="#">京楼盘直降5000 中信府 公园楼王现房</a></li>
+        </ul>
+    </div>
+    <div class="tab-content tab-content-hide">
+        <ul>
+            <li><a href="#">40平出租屋大改造 美少女的混搭小窝</a></li>
+            <li><a href="#">经典清新简欧爱家 90平老房焕发新生</a></li>
+            <li><a href="#">新中式的酷色温情 66平撞色活泼家居</a></li>
+            <li><a href="#">瓷砖就像选好老婆 卫生间烟道的设计</a></li>
+        </ul>
+    </div>
+    <div class="tab-content tab-content-hide">
+        <ul>
+            <li><a href="#">通州豪华3居260万 二环稀缺2居250w甩</a></li>
+            <li><a href="#">西3环通透2居290万 130万2居限量抢购</a></li>
+            <li><a href="#">黄城根小学学区仅260万 121平70万抛!</a></li>
+            <li><a href="#">独家别墅280万 苏州桥2居优惠价248万</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

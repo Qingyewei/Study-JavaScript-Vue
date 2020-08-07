@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <img src="./img/111.jpg" alt="" id="imgs">
     <input type="button" id="but" value="开始">
@@ -13,21 +15,28 @@
         var imgs = document.getElementById("imgs");
         var but = document.getElementById("but");
         var but2 = document.getElementById("but2");
-        var imgArr = ["./img/111.jpg","./img/222.jpg","./img/333.jpg","./img/444.jpg","./img/555.jpg"]
+        var imgArr = ["./img/111.jpg", "./img/222.jpg", "./img/333.jpg", "./img/444.jpg", "./img/555.jpg"]
         var index = 0;
         var time;
-        
+
         // but.onclick = function() {
         //     clearInterval(time)
-            time = setInterval(function(){
+        function play() {
+            time = setInterval(function () {
                 imgs.src = imgArr[index];
                 index++;
-                index =index % imgArr.length 
-            } , 2000)
+                index = index % imgArr.length
+            }, 2000)
+        }
+
+        play();
+        imgs.onmouseout =play
+
         // }
-        but2.onclick = function() {
+        but2.onclick = function () {
             clearInterval(time)
         }
     </script>
 </body>
+
 </html>

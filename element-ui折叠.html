@@ -1,90 +1,502 @@
+<!-- <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			div{
+				width: 200px;
+				height: 300px;
+				background-color: #BCBCBC;
+				display: none;
+			}
+    </style>
+		</style>
+	</head>
+	<body>
+		<button>按钮</button>
+		<div></div>
+		<script>
+			var But=document.getElementsByTagName("button")[0];
+			var oDiv=document.getElementsByTagName("div")[0];
+			But.onclick=function(e){                  //点击出现
+				 oDiv.style.display="block";
+				 e.stopPropagation();         //阻止冒泡
+			}
+			// 点击空白消失
+			document.onclick=function(e){
+				oDiv.style.display="none";
+			}
+		</script>
+	</body>
+</html>
+ -->
+
+
+<!-- <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <title>图片预览</title>
+ <style>
+ *{
+	 margin:0;
+	 padding:0;
+ }
+ .image{
+	 width:100px;
+ }
+ </style>
+ 
+ </head>
+ <body>
+ <div style="margin:auto;width:1000px">
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ <img src="https://user-gold-cdn.xitu.io/2018/5/13/16359c7b4fffa97c?imageslim" class="image"><br>
+ </div>
+ </body>
+ </html>
+ 
+ <script>
+ let container = document.documentElement||document.body;
+ let img,div,src;
+ let x,y,w,h,tx,ty,tw,th,ww,wh;
+ let closeMove=function(){
+	 if(div==undefined){
+		 return false;
+	 }
+	 div.style.opacity=0;
+	 img.style.height=h+"px";
+	 img.style.width=w+"px";
+	 img.style.left=x+"px";
+	 img.style.top=(y - container.scrollTop)+"px";
+	 // 延迟移除dom
+	 setTimeout(function(){
+		 div.remove();
+		 img.remove();
+	 },100);
+ };
+ 
+ let closeFade=function(){
+	 if(div==undefined){
+		 return false;
+	 }
+	 div.style.opacity=0;
+	 img.style.opacity=0;
+	 // 延迟移除dom
+	 setTimeout(function(){
+		 div.remove();
+		 img.remove();
+	 },100);
+ };
+ 
+ // 监听滚动关闭层
+ document.addEventListener("scroll",function(){
+	 closeFade();
+ });
+ document.querySelectorAll("img").forEach(v=>{
+	 v.addEventListener("click",function(e){ // 注册事件
+		 // 记录小图的位置个大小
+		 x=e.target.offsetLeft;
+		 y=e.target.offsetTop;
+		 w=e.target.offsetWidth;
+		 h=e.target.offsetHeight;
+		 src=e.target.src;
+ 
+		 // 创建遮罩层
+		 div=document.createElement("div");
+		 div.style.cssText=`
+			 position:fixed;
+			 left:0;
+			 top:0;
+			 bottom:0;
+			 right:0;
+			 background-color:#fff;
+			 transition:all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+			 opacity:0;
+		 `;
+		 document.body.appendChild(div);
+		 setTimeout(function(){
+			 div.style.opacity=1;
+		 },0);
+		 // (此处可以加loading)
+ 
+		 // 创建副本
+		 img=new Image();
+		 img.src=src;
+		 img.style.cssText=`
+			 position:fixed;
+			 left:${x}px;
+			 top:${y - container.scrollTop}px;
+			 width:${w}px;
+			 height:${h}px;
+			 transition:all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+			 opacity:0;
+		 `;
+		 img.onload=function(){
+			 document.body.appendChild(img);
+			 // 浏览器宽高
+			 wh=window.innerHeight;
+			 ww=window.innerWidth;
+ 
+			 // 目标宽高和坐标
+			 tw=w/h*wh >> 0;
+			 th=wh;
+			 tx=(ww - tw) / 2;
+			 ty=0;
+			 
+			 // 延迟写入否则不会有动画
+			 setTimeout(function(){
+				 img.style.opacity=1;
+				 img.style.height=wh+"px";
+				 img.style.width=tw+"px";
+				 img.style.left=tx+"px";
+				 img.style.top=ty+"px";
+				 // 点击隐藏
+				 div.onclick=img.onclick=closeMove;
+			 },0);
+		 };
+	 });//end event
+ });//end forEach
+ </script>
+  -->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<style>
+		#prompt3 {
+			width: 100px;
+			height: 100px;
+			/*z-index: 999;*/
+			float: left;
+			/*border: 1px solid black;*/
+			text-align: center;
+			position: relative;
+		}
+
+		#imgSpan {
+			position: absolute;
+			/*top: 25px;*/
+			/*left:15px;*/
+			/*background-color: #52a7f8;*/
+			color: #ffffff;
+			border-radius: 5px;
+			width: 100px;
+			height: 100px;
+			/*padding-top: 36px;*/
+		}
+
+		#imgSpan:hover {
+			background-color: #1879d4;
+		}
+
+		.filepath {
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+		}
+
+		#previewImg {
+			float: left;
+		}
+
+		#previewImg p {
+			width: 100px;
+			height: 100px;
+			margin-right: 5px;
+			float: left;
+			position: relative;
+			padding-bottom: 17px;
+		}
+
+		#previewImg img {
+			width: 100px;
+			height: 100px;
+			border: 1px solid #d4d4d4;
+			padding: 5px;
+		}
+
+		#previewImg span {
+			cursor: pointer;
+			position: absolute;
+			bottom: -10px;
+			display: none;
+			background: #999999;
+			border-radius: 5px;
+			color: #fff;
+			padding: 2px 5px;
+			left: 30px;
+		}
+
+		#previewImg p:hover .delSpan {
+			display: inline-block;
+		}
+
+		.imgSee {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			background-color: rgba(0, 0, 0, 0.1);
+			top: 0;
+			left: 0;
+			display: none;
+		}
+
+		#imgbox {
+			width: 800px;
+			height: 800px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -400px;
+			margin-left: -400px;
+			text-align: center;
+		}
+
+		#imgSeeimg {
+			display: inline-block;
+		}
+
+		.function a {
+			display: block;
+			width: 32px;
+			height: 32px;
+			background-image: url(x.png);
+			text-decoration: none;
+			color: #000000;
+			background-size: 100%;
+		}
+
+		.function {
+			width: 150px;
+			background-color: #FFFFFF;
+			position: absolute;
+			display: flex;
+			justify-content: space-between;
+			right: 6%;
+			top: 50px;
+		}
+
+		.imgIcon {
+			display: block;
+			width: 32px;
+			height: 32px;
+			background-image: url(xuanzhuan.png);
+			background-size: 100%;
+		}
+
+		.imgEnlarge {
+			display: block;
+			width: 32px;
+			height: 32px;
+			background-image: url(./fangda.png);
+			background-size: 100%;
+		}
+
+		.imgNarrowe {
+			display: block;
+			width: 32px;
+			height: 32px;
+			background-image: url(./suoxiao.png);
+			background-size: 100%;
+		}
+	</style>
+	<script>
+		function changepic() {
+			var file = document.getElementById('file')
+			var reads = new FileReader();
+			var preview = $('#file').parent().prev();
+			var str = ''
+			f = file.files[0];
+			// 将图片存入
+			reads.readAsDataURL(f);
+			reads.onload = function () {
+				str = "<p><img src='" + this.result +
+					"' onclick='imgSee(this)' title='点击查看图片'/><span class='delSpan' onclick='del(this)'>删除</span></p>"
+				preview.append(str);
+			}
+
+			if (preview.children().length >= 2) {
+				file.parentNode.style.cssText = 'display: none;'
+				return
+			}
+			file.value = null
+		};
+		// 删除写法
+		function del(e) {
+			// 兼容IE的写法
+
+			document.getElementById('file').value = null
+			document.getElementById('prompt3').style.cssText = 'display: block;'
+
+			e.parentNode.parentNode.removeChild(e.parentNode);
+			// e.parentNode.remove()
+		}
+		// 查看图片函数
+		// 先保存原始宽度
+		var initialWith = 0
+		// 显示图片
+		function imgSee(e) {
+			var imgDisplay = document.getElementsByClassName('imgSee')[0];
+			document.onselectstart = function () {
+				return false;
+			}
+			imgDisplay.style.cssText = 'display: block; z-index: 999'
+			document.getElementById('imgSeeimg').src = e.src
+			document.getElementById('imgSeeimg').style.cssText = "transform:rotate(0deg)"
+			n = 0
+			document.getElementById('imgSeeimg').style.marginTop = (800 - document.getElementById('imgSeeimg').height) / 2 +
+				'px'
+		}
+		// 点击后图片消失
+		function imgDisappea(e) {
+			document.onselectstart = function () {
+				return true;
+			}
+			e.parentNode.parentNode.style.cssText = 'display: none;'
+			document.getElementById('imgSeeimg').style.cssText = ''
+		}
+		var n = 0
+		var i = 1
+		// 点击后图片旋转90度
+		function imgRotate() {
+			let img = document.getElementById('imgSeeimg')
+			var time = setInterval(function () {
+				n += 5
+				if (n == 90 * i) {
+					i++
+					clearInterval(time)
+				}
+				img.style.transform = "rotate(" + n + "deg)"
+			}, 30)
+
+		}
+		window.onload = function () {
+			var dv = document.getElementById('imgSeeimg');
+			var x = 0;
+			var y = 0;
+			var l = 0;
+			var t = 0;
+			var isDown = false;
+			//鼠标按下事件
+			dv.onmousedown = function (e) {
+				//获取x坐标和y坐标
+				x = e.clientX;
+				y = e.clientY;
+				e.preventDefault();
+				//获取左部和顶部的偏移量
+				l = dv.offsetLeft;
+				t = dv.offsetTop;
+				//开关打开
+				isDown = true;
+				//设置样式  
+				dv.style.position = 'absolute'
+				document.getElementById('imgSeeimg').style.marginTop = '0px'
+				var nx = e.clientX;
+				var ny = e.clientY;
+				var nx = e.clientX;
+				var ny = e.clientY;
+				var nl = nx - (x - l);
+				var nt = ny - (y - t);
+				dv.style.left = nl + 'px';
+				dv.style.top = nt + 'px';
+				dv.style.cursor = 'move';
+			}
+			//鼠标移动
+			window.onmousemove = function (e) {
+				if (isDown == false) {
+					return;
+				}
+				document.getElementById('imgSeeimg').style.marginTop = '0px'
+				// dv.style.position = 'absolute'
+				//获取x和y
+				var nx = e.clientX;
+				var ny = e.clientY;
+				//计算移动后的左偏移量和顶部的偏移量
+				var nl = nx - (x - l);
+				var nt = ny - (y - t);
+				dv.style.left = nl + 'px';
+				dv.style.top = nt + 'px';
+			}
+			//鼠标抬起事件
+			dv.onmouseup = function () {
+				//开关关闭
+				isDown = false;
+				dv.style.cursor = 'default';
+			}
+		}
+		// 放大图片功能
+		function enlarge() {
+			var width = document.getElementById('imgSeeimg').width
+			var n = width
+			var time = setInterval(function () {
+				n = n + 10
+				if (n > width * 1.2) {
+					clearInterval(time)
+				}
+				document.getElementById('imgSeeimg').style.width = n + 'px'
+			}, 30)
+		}
+
+		function narrowe() {
+			// if(initialWith!=0){
+			//  document.getElementById('imgSeeimg').style.width = initialWith+'px'
+			// }
+			var width = document.getElementById('imgSeeimg').width
+			var n = width
+			var time = setInterval(function () {
+				n = n - 10
+				if (n < width * 0.8) {
+					clearInterval(time)
+				}
+				document.getElementById('imgSeeimg').style.width = n + 'px'
+			}, 30)
+		}
+	</script>
 </head>
+
 <body>
-    <div id="app">
-          <!--一组折叠面板最外层包裹div-->
-  <div class="el-collapse" role="tablist" aria-multiselectable="true">
-    <slot></slot>
-  </div>
-    </div>
-    <script src="./js/vue.js"></script>
-    <script>
-        const app = new Vue({
-            el:'#app',
-            name: 'ElCollapse',
+	<div class="img">
+		<img src="./img/下载 .jpg"
+			onclick="imgSee(this)"></div>
 
-    componentName: 'ElCollapse',
+	<div class="imgSee">
+		<div id="imgbox">
+			<img id="imgSeeimg">
+		</div>
+		<!--功能区-->
+		<div class="function">
+			<i class="imgEnlarge" onclick="enlarge()"></i>
+			<i class="imgNarrowe" onclick="narrowe()"></i>
+			<i class="imgIcon" onclick="imgRotate()"></i>
+			<a onclick="imgDisappea(this)"></a>
+		</div>
+	</div>
 
-    props: {
-      accordion: Boolean, //是否手风琴模式
-      value: {  //当前激活的面板(如果是手风琴模式，绑定值类型需要为string，否则为array)
-        type: [Array, String, Number],
-        default() {
-          return [];
-        }
-      }
-    },
-
-    data() {
-      return {
-        activeNames: [].concat(this.value) //当前激活的面板名称数组
-      };
-    },
-
-    provide() {
-      return {
-        collapse: this
-      };
-    },
-
-    watch: {
-      value(value) {
-        this.activeNames = [].concat(value);
-      }
-    },
-
-    methods: {
-      setActiveNames(activeNames) {
-        // 返回activeNames数组的副本
-        activeNames = [].concat(activeNames);
-        //如果是手风琴模式返回activeNames[0]，不是则返回整个数组
-        let value = this.accordion ? activeNames[0] : activeNames;
-        this.activeNames = activeNames;
-        //触发父组件的input方法
-        this.$emit('input', value);
-        //触发父组件的change方法
-        this.$emit('change', value);
-      },
-      handleItemClick(item) {
-        // 如果是手风琴模式
-        if (this.accordion) {
-          this.setActiveNames(
-            (this.activeNames[0] || this.activeNames[0] === 0) &&
-            this.activeNames[0] === item.name
-              ? '' : item.name
-          );
-        } else { //如果不是手风琴模式
-          let activeNames = this.activeNames.slice(0);
-          let index = activeNames.indexOf(item.name);
-          if (index > -1) { //如果该面板已经是激活状态，就将其从activeNames数组中删除
-            activeNames.splice(index, 1);
-          } else {  //如果该面板还未是激活状态，就将其push进activeNames数组中
-            activeNames.push(item.name);
-          }
-          this.setActiveNames(activeNames);
-        }
-      }
-    },
-
-    created() {
-      this.$on('item-click', this.handleItemClick);
-    }
-        })
-    </script>
 </body>
+
 </html>

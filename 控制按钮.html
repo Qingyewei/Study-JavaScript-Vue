@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <textarea rows="3" cols="10">fsdjfsdkjfkjskjflkjdskjfkjdsfsd</textarea>
+        <input type="button" id="btn" value="剩余时间5秒" disabled="true" />
+    </body>
+    <script type="text/javascript">
+            var count = 5;
+            var butt = document.getElementById("btn")
+                var time=setInterval(function(){
+                    document.getElementById("btn").value ="剩余时间"+(--count)+"秒";
+                    //alert(count);
+                    count--;
+                    if(count<=0){
+                        butt.disabled =null;
+                        butt.value = null;
+                        
+                    }
+                },1000)
+        </script>
+</html>
