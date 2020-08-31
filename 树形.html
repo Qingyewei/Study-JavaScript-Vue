@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='./js/vue.js'></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <el-table :data="tableData" style="width: 100%;margin-bottom: 20px;" row-key="id" border default-expand-all
+                :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+                <el-table-column v-for='(item,index) in columns' :prop="item.key" :label="item.title" :key="index"
+                    :sortable='item.sortable'>
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                        <el-button type="text" size="small">编辑</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                columns: [{
+                        title: '日期',
+                        key: 'date',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '姓名',
+                        key: 'name',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '省份',
+                        key: 'province',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '市区',
+                        key: 'city',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '姓名',
+                        key: 'name',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '省份',
+                        key: 'province',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '市区',
+                        key: 'city',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '姓名',
+                        key: 'name',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '省份',
+                        key: 'province',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '市区',
+                        key: 'city',
+                        width: 180,
+                        sortable: true
+                    },
+                    {
+                        title: '地址',
+                        key: 'address',
+                    },
+                ],
+                tableData: [{
+                    id: 1,
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    province: '上海',
+                    city: '普陀区',
+                }, {
+                    id: 2,
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄',
+                    province: '上海',
+                    city: '普陀区',
+                }, {
+                    id: 3,
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄',
+                    province: '上海',
+                    city: '普陀区',
+                    children: [{
+                        id: 31,
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        address: '上海市普陀区金沙江路 1519 弄',
+                    province: '上海',
+                    city: '普陀区',
+                    }, {
+                        id: 32,
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        address: '上海市普陀区金沙江路 1519 弄',
+                    province: '上海',
+                    city: '普陀区',
+                    }]
+                }, {
+                    id: 4,
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄',
+                    province: '上海',
+                    city: '普陀区',
+                }],
+            }
+        },
+        methods: {
+            load(tree, treeNode, resolve) {
+                setTimeout(() => {
+                    resolve([{
+                        id: 31,
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        address: '上海市普陀区金沙江路 1519 弄'
+                    }, {
+                        id: 32,
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        address: '上海市普陀区金沙江路 1519 弄'
+                    }])
+                }, 1000)
+            }
+        },
+    })
+</script>
+
+</html>
